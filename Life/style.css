@@ -36,7 +36,12 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 300px;
+    width: 450px;
+}
+
+.generations-count {
+    display: block;
+    width: 150px;
 }
 
 .btn {
@@ -61,4 +66,16 @@ img {
     background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='50px' height='50px' viewBox='0 0 50 50' version='1.1'%3E%3Cg id='surface1'%3E%3Cpath style=' stroke:none;fill-rule:nonzero;fill:teal;fill-opacity:1;' d='M 23.433594 33.765625 L 23.433594 16.230469 C 23.433594 15.902344 23.171875 15.640625 22.839844 15.640625 L 19.347656 15.640625 C 19.015625 15.640625 18.753906 15.902344 18.753906 16.230469 L 18.753906 33.765625 C 18.753906 34.09375 19.015625 34.359375 19.347656 34.359375 L 22.839844 34.359375 C 23.171875 34.359375 23.433594 34.097656 23.433594 33.765625 Z M 23.433594 33.765625 '/%3E%3Cpath style=' stroke:none;fill-rule:nonzero;fill:teal;fill-opacity:1;' d='M 30.652344 15.640625 L 27.160156 15.640625 C 26.835938 15.640625 26.566406 15.902344 26.566406 16.230469 L 26.566406 33.765625 C 26.566406 34.09375 26.828125 34.359375 27.160156 34.359375 L 30.652344 34.359375 C 30.976562 34.359375 31.246094 34.097656 31.246094 33.765625 L 31.246094 16.230469 C 31.246094 15.902344 30.984375 15.640625 30.652344 15.640625 Z M 30.652344 15.640625 '/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.click-mode,
+.hover-mode {
+    font-size: 14px;
+    width: 100px;
+    border-radius: 30px;
+}
+
+.is-active {
+    background-color: teal;
+    color: #fff;
 }

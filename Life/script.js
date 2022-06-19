@@ -1,5 +1,7 @@
 const gameField = document.querySelector('.game-field');
-const startBtn = document.querySelector('.btn');
+const startBtn = document.querySelector('.start-btn');
+const clickModeBtn = document.querySelector('.click-mode');
+const hoverModeBtn = document.querySelector('.hover-mode');
 const generationsCountElem = document.querySelector('.generations-count');
 const size = 50;
 const generationDuration = 100;
@@ -9,13 +11,17 @@ let generationsCount = 1;
 let isGame;
 let interval;
 
+const createArray = (arr) => {
+    arr.push(new Array(size).fill(0));
+};
+
 const createWorld = () => {
     for (let y = 0; y < size; y++) {
         const row = document.createElement('div');
         row.classList.add('row');
         row.dataset.y = y;
         const rowElements = [];
-        cells.push(new Array(size).fill(0));
+        createArray(cells);
         elements.push(rowElements);
         gameField.appendChild(row);
         
@@ -55,7 +61,7 @@ const renderCells = () => {
 const ressetWorld = () => {
     const evolvedCells = [];
     for (let i = 0; i < size; i++) {
-        evolvedCells.push(new Array(size).fill(0));
+        createArray(evolvedCells);
     }
     for (let y = 0; y < size; y++) {
         for (let x = 0; x < size; x++) {
@@ -72,20 +78,38 @@ const ressetWorld = () => {
     renderCells();
     generationsCount++;
     generationsCountElem.innerText = `Generation: ${generationsCount}`;
-}
+};
+
+const setLifeOnMouseEvents = function (event) {
+    const x = event.target.getAttribute('data-x');
+    const y = event.target.getAttribute('data-y');
+
+    if (event.target.closest('.cell')) {
+        event.target.classList.add('alive');
+    }
+    cells[y][x] = 1;
+};
+
+const classHandler = (activeElement, disabledElement) => {
+    disabledElement.classList.remove('is-active');
+    activeElement.classList.add('is-active');
+};
 
 gameField.style.width = `${size * 10}px`;
 createWorld();
 renderCells();
+gameField.addEventListener('click', setLifeOnMouseEvents);
 
-gameField.addEventListener('click', ({ target }) => {
-    const x = target.getAttribute('data-x');
-    const y = target.getAttribute('data-y');
+clickModeBtn.addEventListener('click', () => {
+    gameField.addEventListener('click', setLifeOnMouseEvents);
+    gameField.removeEventListener('mouseover', setLifeOnMouseEvents);
+    classHandler(clickModeBtn, hoverModeBtn);
+});
 
-    if (target.closest('.cell')) {
-        target.classList.add('alive');
-    }
-    cells[y][x] = 1;
+hoverModeBtn.addEventListener('click', () => {
+    gameField.addEventListener('mouseover', setLifeOnMouseEvents);
+    gameField.removeEventListener('click', setLifeOnMouseEvents);
+    classHandler(hoverModeBtn, clickModeBtn);
 });
 
 startBtn.addEventListener('click', () => {
@@ -94,4 +118,3 @@ startBtn.addEventListener('click', () => {
     startBtn.classList.toggle('on-play');
     isGame ? interval = setInterval(ressetWorld, generationDuration) : clearInterval(interval);
 });
-
