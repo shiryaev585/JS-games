@@ -9,26 +9,11 @@ img {
     height: 100px;
 }
 
-.game-field {
-    border: 1px solid #008080;
-    box-sizing: border-box;
+#canvas {
+    display: block;
+    background-color: rgb(255 233 204);
     margin: auto;
     box-sizing: border-box;
-}
-
-.row {
-    display: flex;
-}
-
-.cell {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    box-sizing: border-box;
-}
-
-.alive {
-    background-color: rgb(76, 203, 137);
 }
 
 .bottom {
